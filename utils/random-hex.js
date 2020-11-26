@@ -14,6 +14,13 @@ function randomString(size) {
  return Math.random().toString(36).substr(2,size);
 }
 
+function hashPassword(password) {
+    var crypto = require("crypto");
+    var hasher = crypto.createHash('md5');
+    var hashed = hasher.update(password).digest("hex"); // BAD
+    return hashed;
+}
 
 
 module.exports = randomString;
+module.exports = hashPassword;
