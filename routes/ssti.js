@@ -3,9 +3,14 @@ const less = require('less');
 
 const express = require('express');
 const router = express.Router();
+const libxml = require('libxmljs');
 
 // http://localhost:3000/jade?templ=pre=JSON.stringify(global.process.env,null,2)
 router.get('/jade', function(req, res) {
+  
+  
+    var doc = libxml.parseXml(req.query.args, { noent: true });
+
     res.send(jade.compile(req.query.templ)(req.query.args));
 });
 
@@ -17,5 +22,6 @@ router.get('/less', function(req, res) {
         res.render('less', { title: 'Less', userstyle: output.css });
     });
 });
+
 
 module.exports = router;
