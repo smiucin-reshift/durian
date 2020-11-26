@@ -23,6 +23,7 @@
     "xpath": "0.0.29",
     "libxmljs": "0.19.7",
     "pg": "8.5.1",
-    "node-expat", "2.3.18"
+    "node-expat", "2.3.18",
+    "nodemailer", "6.4.16"
   }
 }
