@@ -1,7 +1,13 @@
 const pg = require('pg');
 const pool = new pg.Pool(config);
+const express = require('express');
+const router = express.Router();
 
-function handler(req, res) {
+
+
+
+// http://localhost:3000/eval?code=this.process.env
+router.get('/handle', function(req, res) {
   // BAD: the category might have SQL special characters in it
   var query1 = "SELECT ITEM,PRICE FROM PRODUCT WHERE ITEM_CATEGORY='"
              + req.params.category + "' ORDER BY PRICE";
