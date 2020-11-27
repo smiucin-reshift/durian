@@ -21,4 +21,6 @@ router.get('/handle', function(req, res) {
   pool.query(query2, [req.params.category], function(err, results) {
       // process results
   });
-}
+});
+
+module.exports = router;
